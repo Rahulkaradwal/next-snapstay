@@ -2,6 +2,7 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { FC, ReactElement } from "react";
 import { Cabin } from "../services/Types";
+import Link from "next/link";
 
 type CabinCardProps = {
   cabin: Cabin;
@@ -53,12 +54,12 @@ export const CabinCard: FC<CabinCardProps> = ({ cabin }): ReactElement => {
         </div>
 
         <div className="bg-primary-950 border-t border-t-primary-800 text-right">
-          <a
+          <Link
             href={`/cabins/${id}`}
             className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"
           >
             Details & reservation &rarr;
-          </a>
+          </Link>
         </div>
       </div>
     </div>
