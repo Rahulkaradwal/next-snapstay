@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "../components/customUI/Navigation";
-import { Box } from "@chakra-ui/react";
-import { Provider } from "../components/ui/provider";
 import { Josefin_Sans } from "next/font/google";
+import Header from "./_components/header";
 
 export const metadata: Metadata = {
   title: { template: "%s | Snapstay", default: "Welcome Snapstay" },
@@ -21,13 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased p-4 ${josefin.className} `}>
-        <Provider>
-          <Navigation />
-          <Box as="main">{children}</Box>
-          <Box as="footer">Copyright &copy; 2025</Box>
-        </Provider>
+    <html lang="en" className={josefin.className}>
+      <body
+        className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative`}
+      >
+        <Header />
+        <main className="max-w-7xl mx-auto w-full">{children}</main>
       </body>
     </html>
   );
