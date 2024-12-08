@@ -1,20 +1,25 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { FC, ReactElement } from "react";
+import { Cabin } from "../services/Types";
 
 type CabinCardProps = {
-  cabin: any;
+  cabin: Cabin;
 };
 
 export const CabinCard: FC<CabinCardProps> = ({ cabin }): ReactElement => {
-  const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
+  const { _id: id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
     <div className="flex border-primary-800 border">
       <Image
         src={image}
+        width={200}
+        height={100}
+        loading="lazy"
+        quality={70}
         alt={`Cabin ${name}`}
-        className="flex-1 border-r border-primary-800"
+        className="flex-1 border-r border-primary-800 object-cover"
       />
 
       <div className="flex-grow">

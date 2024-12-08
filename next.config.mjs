@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    optimizePackageImports: ["@chakra-ui/react"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "snap-stay.s3.us-east-2.amazonaws.com",
+      },
+    ],
   },
 };
 

@@ -1,13 +1,15 @@
-import { FC, ReactElement } from "react";
 import { Metadata } from "next";
 import { CabinCard } from "../_components/cabin-card";
+import { Cabin, CabinResponse } from "../services/Types";
+import { getCabins } from "../services/ApiRequests";
 
 export const metadata: Metadata = {
   title: "Cabins",
 };
 
-const Page: FC = (): ReactElement => {
-  const cabins: any = [];
+const Page = async () => {
+  const data: CabinResponse = await getCabins();
+  const cabins = data.data;
 
   return (
     <div>
@@ -25,8 +27,8 @@ const Page: FC = (): ReactElement => {
 
       {cabins.length > 0 && (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin: any) => (
-            <CabinCard cabin={cabin} key={cabin.id} />
+          {cabins.map((cabin: Cabin) => (
+            <CabinCard cabin={cabin} key={cabin._id} />
           ))}
         </div>
       )}
