@@ -132,9 +132,14 @@ export type CabinResponse = {
   totalResults: number;
   data: Cabin[];
 };
+export type Response = {
+  status: string;
+  totalResults: number;
+  data: Cabin;
+};
 
 export type Cabin = {
-  bookingSettings: BookingSettings;
+  bookingSettings?: BookingSettings;
   description: string;
   discount: number;
   image: string;

@@ -1,11 +1,10 @@
 import React from "react";
-import SpinnerMini from "../_components/spinner-mini";
+import Spinner from "../_components/spinner";
 
 function loading() {
   return (
     <div className="grid  items-center justify-center">
-      <SpinnerMini />
-      <p className="text-lg text-primary-200">Loading cabins...</p>
+      <Spinner /> <p className="text-lg text-primary-200">Loading cabins...</p>
     </div>
   );
 }
