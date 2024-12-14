@@ -1,16 +1,15 @@
 import { Metadata } from "next";
-import { CabinCard } from "../_components/cabin-card";
-import { Cabin, CabinResponse } from "../services/Types";
-import { getCabins } from "../services/ApiRequests";
+import { Suspense } from "react";
+import CabinItem from "../_components/cabin-item";
+import SpinnerMini from "../_components/spinner-mini";
+import Filter from "../_components/filter";
 
 export const metadata: Metadata = {
   title: "Cabins",
 };
+// export const revalidate = 0;
 
-const Page = async () => {
-  const data: CabinResponse = await getCabins();
-  const cabins = data.data;
-
+const Page = () => {
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -22,16 +21,13 @@ const Page = async () => {
         days exploring the dark forests around, or just relaxing in your private
         hot tub under the stars. Enjoy nature&apos;s beauty in your own little
         home away from home. The perfect spot for a peaceful, calm vacation.
-        Welcome to paradise.
+        Welcome to paradise.ß
       </p>
-
-      {cabins.length > 0 && (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-          {cabins.map((cabin: Cabin) => (
-            <CabinCard cabin={cabin} key={cabin._id} />
-          ))}
-        </div>
-      )}
+      <Filter />
+      <Suspense fallback={<SpinnerMini />}>
+        {/* @ts-expect-error Server Component */}
+        <CabinItem />
+      </Suspense>
     </div>
   );
 };
