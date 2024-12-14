@@ -9,9 +9,15 @@ export const metadata: Metadata = {
 };
 // export const revalidate = 0;
 
-const Page = () => {
+const Page = ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) => {
+  const filter = searchParams?.capacity ?? "all";
+
   return (
-    <div>
+    <div className=" pt-4">
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
         Our Luxury Cabins
       </h1>
@@ -26,7 +32,7 @@ const Page = () => {
       <Filter />
       <Suspense fallback={<SpinnerMini />}>
         {/* @ts-expect-error Server Component */}
-        <CabinItem />
+        <CabinItem filter={filter} />
       </Suspense>
     </div>
   );
