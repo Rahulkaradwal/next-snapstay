@@ -30,7 +30,7 @@ const Page = ({
         Welcome to paradise.ß
       </p>
       <Filter />
-      <Suspense fallback={<SpinnerMini />}>
+      <Suspense fallback={<SpinnerMini />} key={filter}>
         {/* @ts-expect-error Server Component */}
         <CabinItem filter={filter} />
       </Suspense>

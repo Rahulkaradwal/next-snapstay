@@ -1,55 +1,53 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-const ButtonStyles = "px-8 py-3 hover:bg-primary-800";
+import { Button } from "./Button";
 
 function Filter() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathName = usePathname();
 
+  const activeFilter = searchParams?.get("capacity") ?? "all";
+
   function handleClick(value: string): void {
     const params = new URLSearchParams(searchParams);
+
     params.set("capacity", value);
-    router.replace(`${pathName}?${params.toString()}`);
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   return (
     <div className="flex justify-end">
       <div className="text-right flex  border   border-primary-800 w-fit mb-4">
-        <button
-          onClick={() => {
-            handleClick("all");
-          }}
-          className={ButtonStyles}
+        <Button
+          handleClick={() => handleClick("all")}
+          filter="all"
+          activeFilter={activeFilter}
         >
           All
-        </button>
-        <button
-          onClick={() => {
-            handleClick("small");
-          }}
-          className={ButtonStyles}
+        </Button>
+        <Button
+          handleClick={() => handleClick("small")}
+          filter="small"
+          activeFilter={activeFilter}
         >
-          Small
-        </button>
-        <button
-          onClick={() => {
-            handleClick("medium");
-          }}
-          className={ButtonStyles}
+          1-4 Guests
+        </Button>
+        <Button
+          handleClick={() => handleClick("medium")}
+          filter="medium"
+          activeFilter={activeFilter}
         >
-          Medium
-        </button>
-        <button
-          onClick={() => {
-            handleClick("large");
-          }}
-          className={ButtonStyles}
+          5-8 Guests
+        </Button>
+        <Button
+          handleClick={() => handleClick("large")}
+          filter="large"
+          activeFilter={activeFilter}
         >
-          Large
-        </button>
+          8+ Guests
+        </Button>
       </div>
     </div>
   );
